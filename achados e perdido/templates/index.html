@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Achados e Perdidos</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>🔍 Achados e Perdidos</h1>
+
+<a href="/cadastrar" class="btn">Cadastrar Item</a>
+
+<div class="filtros">
+    <a href="/">Todos</a>
+    <a href="/?filtro=perdido">Perdidos</a>
+    <a href="/?filtro=encontrado">Encontrados</a>
+</div>
+
+{% for item in itens %}
+
+<div class="card">
+
+    <h2>{{ item[1] }}</h2>
+
+    <p><strong>Tipo:</strong> {{ item[5] }}</p>
+
+    <p><strong>Descrição:</strong> {{ item[2] }}</p>
+
+    <p><strong>Local:</strong> {{ item[3] }}</p>
+
+    <p><strong>Contato:</strong> {{ item[4] }}</p>
+
+    {% if item[6] == 0 %}
+        <a href="/resolver/{{ item[0] }}" class="resolver">
+            Marcar como Resolvido
+        </a>
+    {% else %}
+        <span class="resolvido">✅ Resolvido</span>
+    {% endif %}
+
+</div>
+
+{% endfor %}
+
+</body>
+</html>
